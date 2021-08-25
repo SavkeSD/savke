@@ -1,0 +1,5 @@
+# file host_vars/sidecar-prod.yml
+
+hostname: sidecar-prod
+ansible_ssh_host: 10.15.1.26
+ansible_ssh_port: 22

@@ -1,0 +1,41 @@
+---
+####                               #### 
+###                                 ###
+##                                   ##
+# !!!vars file for graylog-prod!!!    #
+##                                   ##
+###                                 ###
+####                               #### 
+
+
+# vars for Graylog
+
+password_secret: "{{ vault_password_secret }}"
+admin_password_sha: "{{ vault_admin_password_sha }}"
+
+####                               #### 
+###                                 ###
+##                                   ##
+# !!!vars file for sidecar-prod!!!    #
+##                                   ##
+###                                 ###
+####                               #### 
+
+# vars for packages 
+apt_packages_sidecar:
+ - net-tools
+ - curl
+ - xz-utils
+ - vim
+ - wget
+
+# vars for sidecar
+sidecar_deb_package_url: "https://packages.graylog2.org/repo/packages/graylog-sidecar-repository_1-2_all.deb"
+
+# for configuration sidecar.yml file
+graylog_server_url: "http://10.15.1.27:9000/api/"  #url of graylog server
+graylog_server_api_token: "{{ vault_graylog_server_api_token }}"
+
+# vars for filebeat
+filebeat_deb_package_url: "https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.13.3-amd64.deb"
+

@@ -1,0 +1,57 @@
+
+####                               #### 
+###                                 ###
+##                                   ##
+# !!!vars file for graylog-all!!!    #
+##                                   ##
+###                                 ###
+####                               #### 
+
+# vars for packages
+apt_packages_graylog:
+ - apt-transport-https
+ - uuid-runtime
+ - pwgen
+ - net-tools
+ - curl
+ - dirmngr
+ - mongodb-server
+ - xz-utils
+ - vim
+ - net-tools
+ - wget
+ - openjdk-11-jre-headless
+
+# vars for Elastic, key and repo
+elastic_search_repo_key: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+elastic_search_apt_deb_url: "deb https://artifacts.elastic.co/packages/oss-7.x/apt stable main"
+
+# vars for Graylog
+graylog_deb_package_url: "https://packages.graylog2.org/repo/packages/graylog-4.1-repository_latest.deb"
+
+
+####                               #### 
+###                                 ###
+##                                   ##
+# !!!vars file for sidecar-all!!!    #
+##                                   ##
+###                                 ###
+####                               #### 
+
+
+# vars for packages 
+apt_packages_sidecar:
+ - net-tools
+ - curl
+ - xz-utils
+ - vim
+ - wget
+
+# vars for sidecar
+sidecar_deb_package_url: "https://packages.graylog2.org/repo/packages/graylog-sidecar-repository_1-2_all.deb"
+
+# for configuration sidecar.yml file
+graylog_server_url: "http://10.15.1.27:9000/api/"  #url of graylog server
+
+# vars for filebeat
+filebeat_deb_package_url: "https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.13.3-amd64.deb"

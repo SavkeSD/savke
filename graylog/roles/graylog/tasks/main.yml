@@ -1,0 +1,69 @@
+---
+# tasks file for Graylog
+
+- name: Install programs
+  become: true
+  apt:
+    name: "{{ apt_packages_graylog }}"
+    update_cache: yes
+    state: latest
+
+- name: Gather the package facts
+  package_facts: 
+    manager: auto
+
+- name: Elasticsearch - Add repo key
+  apt_key:
+    url: "{{ elastic_search_repo_key }}"
+    state: present
+  when: "'graylog-server' not in ansible_facts.packages"
+
+- name: Elasticsearch - Add repo
+  apt_repository:
+    repo: "{{ elastic_search_apt_deb_url }}"
+    state: present
+  when: "'graylog-server' not in ansible_facts.packages"
+
+- name: Install elastic
+  apt: 
+    name: elasticsearch-oss
+    state: latest
+
+- name: Install graylog-server repository configuration
+  apt:
+    deb: "{{ graylog_deb_package_url }}"
+  when: "'graylog-server' not in ansible_facts.packages"
+
+- name: Install graylog-server
+  apt:
+    name: graylog-server
+    update_cache: yes
+    state: latest
+  when: "'graylog-server' not in ansible_facts.packages"   
+  
+- name: Copying server.conf template to host
+  template: 
+    src: roles/graylog/templates/server.conf.j2
+    dest: /etc/graylog/server/server.conf
+    mode: '0644'
+  notify:
+     - Elasticsearch - Restart service 
+     - Graylog - Restart service 
+     - reload systemd configuration
+
+- name: Elasticsearch - Configure java path
+  replace:
+    path: /etc/default/elasticsearch
+    regexp: '^#JAVA_HOME='
+    replace: 'JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64'
+  when: "'graylog-server' not in ansible_facts.packages"
+  notify:
+    - Elasticsearch - Restart service            
+
+- name: Enable services at startup
+  service:
+    name: "{{ item }}"
+    enabled: yes
+  with_items:
+    - elasticsearch
+    - graylog-server

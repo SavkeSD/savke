@@ -1,0 +1,6 @@
+---
+- hosts: sidecar
+  roles:
+    - role: roles/sidecar
+
+   

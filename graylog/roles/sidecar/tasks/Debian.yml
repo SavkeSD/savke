@@ -1,0 +1,61 @@
+---
+# tasks file for Sidecar on Debian/Ubuntu-20.04
+
+- name: Install programs
+  apt:
+    name: "{{ apt_packages_sidecar }}"
+    update_cache: yes
+    state: present
+
+- name: Gather the package facts
+  package_facts: 
+    manager: auto
+
+- name: Install Graylog Sidecar repository configuration
+  apt:
+    deb: "{{ sidecar_deb_package_url }}"
+  when: "'graylog-sidecar-repository' not in ansible_facts.packages"
+
+- name: Install graylog-sidecar
+  apt:
+    name: graylog-sidecar
+    update_cache: yes
+    state: present
+  when: "'graylog-sidecar' not in ansible_facts.packages"
+
+- name: Install graylog-sidecar service
+  command: graylog-sidecar -service install
+  when: "'graylog-sidecar' not in ansible_facts.packages"
+
+- name: Add graylog server into sidecar conf file
+  lineinfile:
+    path: /etc/graylog/sidecar/sidecar.yml
+    regexp: "^#server_url:"
+    line: "server_url: {{ graylog_server_url }}"
+  when: "'graylog-sidecar' not in ansible_facts.packages"
+  notify:
+    - Restart graylog-sidecar service
+
+- name: Add graylog api token into sidecar conf file
+  lineinfile:
+    path: /etc/graylog/sidecar/sidecar.yml
+    regexp: "^server_api_token:"
+    line: "server_api_token: {{ graylog_server_api_token }}"
+  when: "'graylog-sidecar' not in ansible_facts.packages"
+  notify:
+    - Restart graylog-sidecar service          
+
+- name: Install filebeat
+  apt:
+    deb: "{{ filebeat_deb_package_url }}"
+  when: "'filebeat' not in ansible_facts.packages"
+  
+- name: Enable services at startup
+  service:
+    name: "{{ item }}"
+    enabled: yes
+    state: restarted
+  with_items:
+    - filebeat
+    - graylog-sidecar  
+

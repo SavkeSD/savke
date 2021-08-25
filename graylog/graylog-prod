@@ -1,0 +1,7 @@
+# file graylog-prod
+
+[prod:children]
+graylog
+
+[graylog]
+graylog-prod

@@ -1,0 +1,24 @@
+---
+# tasks file for Sidecar on Windows
+
+- name: Install sidecar
+  win_package: 
+    path: https://github.com/Graylog2/collector-sidecar/releases/download/1.1.0/graylog_sidecar_installer_1.1.0-1.exe
+    state: present
+    product_id: Graylog-sidecar
+    arguments:
+      - /S
+      - -SERVERURL={{ graylog_server_url }}
+      - -APITOKEN={{ graylog_server_api_token }}  
+
+- name: Install sidecar service
+  win_service:
+    name: graylog-sidecar      
+    path: C:\Program Files\Graylog\sidecar\graylog-sidecar.exe
+
+- name: Set service startup mode to auto and ensure it is started
+  win_service:
+    name: graylog-sidecar
+    start_mode: auto
+    state: started
+            

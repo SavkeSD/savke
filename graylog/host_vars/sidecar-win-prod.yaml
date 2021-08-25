@@ -1,0 +1,6 @@
+# file host_vars/sidecar-win-prod.yml
+
+hostname: sidecar-win-prod
+ansible_ssh_host: 10.15.0.81
+ansible_connection: winrm
+ansible_winrm_server_cert_validation: ignore
