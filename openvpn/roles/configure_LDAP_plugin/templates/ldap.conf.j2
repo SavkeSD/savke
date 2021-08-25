@@ -1,0 +1,14 @@
+<LDAP>
+	URL		{{ ldap_url }}
+	BindDN		"{{ ldap_bind_dn }}"
+	Password	{{ ldap_bind_dn_pass }}
+	Timeout		15
+	TLSEnable	no
+	FollowReferrals no
+</LDAP>
+<Authorization>
+	BaseDN		"{{ ldap_basedn }}"
+	SearchFilter	"{{ ldap_search }}"
+	RequireGroup	false
+</Authorization>
+

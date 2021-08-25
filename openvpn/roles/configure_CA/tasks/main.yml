@@ -1,0 +1,35 @@
+---
+# tasks file for Configure_CA
+
+- name: Install programs
+  become: true
+  apt:
+      name: "{{ apt_packages }}"
+      update_cache: yes
+      state: latest
+  
+- name: Create CA directory
+  become: yes
+  shell: make-cadir {{ ansible_env.HOME }}/certificate_authority
+  args:
+      creates: "{{ ansible_env.HOME }}/certificate_authority"
+  
+
+- name: Create a PKI
+  become: yes
+  shell: >
+        source vars;
+        ./easyrsa init-pki;
+  args:
+       chdir: "{{ ansible_env.HOME }}/certificate_authority/"
+       creates: "{{ ansible_env.HOME }}/certificate_authority/pki"
+
+- name: Build the certificate authority
+  become: yes
+  shell: >
+        source vars;
+        yes "" | ./easyrsa build-ca nopass;
+  args:
+       chdir: "{{ ansible_env.HOME }}/certificate_authority/"
+       creates: "{{ ansible_env.HOME }}/certificate_authority/pki/ca.crt"  
+

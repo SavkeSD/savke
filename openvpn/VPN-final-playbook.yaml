@@ -1,0 +1,9 @@
+---
+- hosts: ovpn
+  become: true
+  roles:
+    - role: roles/configure_CA
+    - role: roles/configure_OpenVPN_server
+    - role: roles/configure_OpenVPN_client
+    - role: roles/configure_LDAP_plugin
+    - role: roles/configure_network_OpenVPN_server

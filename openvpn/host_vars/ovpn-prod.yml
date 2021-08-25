@@ -1,0 +1,5 @@
+# file host_vars/ovpn-prod.yml
+
+hostname: ovpn-prod
+ansible_ssh_host: 10.15.0.99
+ansible_ssh_port: 22

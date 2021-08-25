@@ -1,0 +1,20 @@
+client
+dev tun
+proto tcp
+;proto udp
+remote {{ vault_public_ip }} {{ vault_port_on_public_ip }}
+resolv-retry infinite
+
+route-nopull   
+route 10.15.0.0 255.255.0.0
+
+nobind
+user nobody
+group nogroup
+persist-key
+persist-tun
+remote-cert-tls server
+cipher AES-256-CBC
+verb 3
+auth-user-pass
+

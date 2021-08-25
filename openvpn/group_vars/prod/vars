@@ -1,0 +1,21 @@
+---
+# vars file for novi-openvnp
+
+# all vars
+apt_packages:
+ - openvpn
+ - easy-rsa
+ - ufw
+ - openvpn-auth-ldap
+
+# Vars for ldap
+
+ldap_url: "{{ vault_ldap_url }}"
+ldap_bind_dn: "cn=test,ou=people,dc=example,dc=com"
+ldap_bind_dn_pass: "{{ vault_ldap_bind_dn_pass }}"
+ldap_basedn: "dc=example,dc=com"
+ldap_search: "(&(objectClass=person)(memberOf=cn=test,ou=group,dc=example,dc=com)(uid=%u))"
+
+# Vars for public IP and port
+public_ip: "{{ vault_public_ip }}"
+port_on_public_ip: "{{ vault_port_on_public_ip }}"

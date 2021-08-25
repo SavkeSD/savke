@@ -1,0 +1,43 @@
+---
+# tasks file for configure_OpenVPN_client
+
+- name: Create keys for client
+  become: yes
+  shell: >
+         source vars;
+         ./easyrsa build-client-full client nopass
+  args:
+       chdir: "{{ ansible_env.HOME }}/certificate_authority/"
+
+- name: Copying clients keys to /etc/openvpn
+  copy:
+       src: "{{ item.src }}"
+       dest: "{{ item.dest }}"
+       remote_src: true
+  loop:
+       - {src: '/root/certificate_authority/pki/private/client.key' , dest: '/etc/openvpn/client/'}
+       - {src: '/root/certificate_authority/pki/issued/client.crt' , dest: '/etc/openvpn/client/'}
+       - {src: '/etc/openvpn/ca.crt' , dest: '/etc/openvpn/client/'}
+
+- name: Copying template for client.ovpn file
+  template:
+           src: roles/VPN-final/configure_OpenVPN_client/templates/client.ovpn.j2
+           dest: /etc/openvpn/client/client.ovpn
+
+- name: Geeting ca.crt into variable
+  shell: |
+         cat /etc/openvpn/ca.crt
+  register: caCert
+
+- name: Append ca.crt into .ovpn
+  lineinfile:
+             path: /etc/openvpn/client/client.ovpn
+             state: present
+             insertbefore: EOF
+             line: |
+                    <ca>
+                    {{ caCert.stdout }}
+                    </ca>
+
+
+       

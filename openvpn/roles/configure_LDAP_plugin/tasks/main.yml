@@ -1,0 +1,23 @@
+---
+# tasks file for configure_LDAP_plugin
+
+- name: Activating LDAP plugin
+  lineinfile:
+             path: /etc/openvpn/server.conf
+             state: present
+             insertbefore: EOF
+             line: |
+                   plugin /usr/lib/openvpn/openvpn-auth-ldap.so  /etc/openvpn/auth/ldap.conf
+                   client-cert-not-required
+
+- name: Create auth folder - where ldap.conf will be stored /etc/openvpn/auth
+  file:
+       path: /etc/openvpn/auth
+       state: directory
+       mode: '0700'  
+
+- name: Copying template of LDAP conf file to OpenVPN server
+  template:
+           src: roles/VPN-final/configure_LDAP_plugin/templates/ldap.conf.j2
+           dest: /etc/openvpn/auth/ldap.conf
+  notify: restart openvpn server

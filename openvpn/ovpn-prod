@@ -1,0 +1,7 @@
+# file ovpn-prod
+
+[prod:children]
+ovpn
+
+[ovpn]
+ovpn-prod

@@ -1,0 +1,41 @@
+---
+# tasks file for configure_OpenVPV_server
+
+- name: Create keys for server
+  become: yes
+  shell: >
+        source vars;
+        ./easyrsa build-server-full server nopass
+  args:
+       chdir: "{{ ansible_env.HOME }}/certificate_authority/"
+       executable: /bin/bash  
+       creates: "{{ ansible_env.HOME }}//certificate_authority/x509-type/server" 
+
+- name: Diffie-Hellman parameters generation
+  become: yes
+  shell: >
+        source vars;
+        ./easyrsa gen-dh
+  args:
+       chdir: "{{ ansible_env.HOME }}/certificate_authority/"
+       executable: /bin/bash
+       creates: "{{ ansible_env.HOME }}/certificate_authority/pki/dh.pem"
+
+- name: Copying file to /etc/openvpn
+  copy:
+       src: "{{ item }}"
+       dest: /etc/openvpn/
+       remote_src: true
+  loop:
+       - '{{ ansible_env.HOME }}/certificate_authority/pki/issued/server.crt'
+       - '{{ ansible_env.HOME }}/certificate_authority/pki/ca.crt'
+       - '{{ ansible_env.HOME }}/certificate_authority/pki/private/server.key'
+       - '{{ ansible_env.HOME }}/certificate_authority/pki/dh.pem'
+
+- name: Copying templates from Ansible to OpenVPN server for configuring OpenVPN server
+  template:
+           src: roles/VPN-final/configure_OpenVPN_server/templates/server.conf
+           dest: /etc/openvpn/server.conf
+  notify: restart openvpn server        
+
+       
