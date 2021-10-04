@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-15">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/New folder/poiNovo/poi/commons-codec-1.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/New folder/poiNovo/poi/commons-collections4-4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/New folder/poiNovo/poi/commons-compress-1.20.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/New folder/poiNovo/poi/commons-math3-3.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/New folder/poiNovo/poi/curvesapi-1.06.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/New folder/poiNovo/poi/poi-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/New folder/poiNovo/poi/poi-excelant-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/New folder/poiNovo/poi/poi-integration-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/New folder/poiNovo/poi/poi-ooxml-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/New folder/poiNovo/poi/poi-ooxml-full-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/New folder/poiNovo/poi/poi-scratchpad-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/New folder/poiNovo/poi/SparseBitSet-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/New folder/poiNovo/poi/xmlbeans-4.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/Selenium/selenium-java-3.141.59/client-combined-3.141.59.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/Selenium/selenium-java-3.141.59/client-combined-3.141.59-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/Selenium/selenium-java-3.141.59/libs/byte-buddy-1.8.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/Selenium/selenium-java-3.141.59/libs/commons-exec-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/Selenium/selenium-java-3.141.59/libs/guava-25.0-jre.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/Selenium/selenium-java-3.141.59/libs/okhttp-3.11.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Savke/Desktop/Selenium/selenium-java-3.141.59/libs/okio-1.14.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
