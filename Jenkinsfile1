@@ -14,18 +14,39 @@ pipeline {
 
         string(
             name: 'CODE_REPO_PATH',
-            description: 'Putanja do git repozitorijuma koji sadrži kod servisa')    
+            description: '''
+Putanja do git repozitorijuma koji sadrži kod servisa. 
+Primer:
+U slucaju repo-a za projekat
+
+https://git.mozzartio.com/data-integration/event-recorder-data.git
+
+Treba upisati u polje u polje CODE_REPO_PATH:
+
+data-integration/event-recorder-data
+                        ''') 
+
+        string(
+            name: 'CONF_REPO_PATH',
+            description: '''
+Putanja do git repozitorijuma koji sadrži konfiguraciju servisa. 
+
+Primer:
+Ako je recimo putanja ovakva
+https://git.mozzartio.com/deploy/services/event-recorder-data.git
+
+Treba upisati u polje CONF_REPO_PATH Sledece:
+deploy/services/event-recorder-data
+                        ''') 
+
+        string(
+            name: 'GITLAB',
+            description: 'Ugasiti ako se ne koristi Gitlab repo ( https://git.mozzartio.com )') 
 
         booleanParam(
 	        name: 'build_only',
 	        defaultValue: true,
-	        description: '''
-Check this if you only want to build the application and not deploy it to serversss
-bla bla bla              
-teste 123 \n
-                          '''
-                          )
-
+	        description: 'Check this if you only want to build the application and not deploy it to serversss')
 
     }
 
