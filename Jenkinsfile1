@@ -77,7 +77,7 @@ deploy/services/event-recorder-data
 
             steps {
                 script {
-                    script.sh
+                    whoami
                 }
             }
         }
