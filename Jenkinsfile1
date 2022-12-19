@@ -61,7 +61,7 @@ deploy/services/event-recorder-data
 
             steps {
                 script {
-                    echo "Cao Cao"
+                    echo "Pulling new configuration for Jenkins job"
                 }
 
             }
@@ -77,7 +77,7 @@ deploy/services/event-recorder-data
 
             steps {
                 script {
-                    echo "Ja radim nesto, i to dobro"
+                    script.sh
                 }
             }
         }
