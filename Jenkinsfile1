@@ -1,0 +1,69 @@
+pipeline {
+    agent any
+
+    options {
+        timeout(time: 60, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+        timestamps()
+    }
+
+    parameters {
+        string(
+            name: 'Job_name',
+            description: 'Job_name treba da bude isto kao i service_name odnosno ime docker kontejnera koji treba da bude izbildovan.')
+
+        string(
+            name: 'CODE_REPO_PATH',
+            description: 'Putanja do git repozitorijuma koji sadrži kod servisa. 
+                Primer:
+                U slucaju repo-a za projekat
+
+                https://git.mozzartio.com/data-integration/event-recorder-data.git
+
+                Treba upisati u polje u polje CODE_REPO_PATH:
+
+                data-integration/event-recorder-data')    
+
+        booleanParam(
+	        name: 'build_only',
+	        defaultValue: true,
+	        description: 'Check this if you only want to build the application and not deploy it to serversss')
+
+
+    }
+
+    stages {
+
+        stage('Pull new configuration for Jenkins job') {
+            when {
+                expression {
+                    params.build_only
+                }
+            }
+
+            steps {
+                script {
+                    echo "Cao Cao"
+                }
+
+            }
+
+        }
+
+        stage('Do something') {
+            when {
+                expression {
+                    !params.build_only
+                }
+            }
+
+            steps {
+                script {
+                    echo "Ja radim nesto, i to dobro"
+                }
+            }
+        }
+
+
+    }
+}
