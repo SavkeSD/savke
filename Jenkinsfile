@@ -15,7 +15,7 @@ pipeline {
 
         booleanParam(
 	        name: 'build_only',
-	        defaultValue: false,
+	        defaultValue: true,
 	        description: 'Check this if you only want to build the application and not deploy it to serversss')
 
         choice(
@@ -26,7 +26,12 @@ pipeline {
 
     stages {
 
-        stage('Prepare workspace') {
+        stage('Pull new configuration for Jenkins job') {
+            when {
+                expression {
+                    params.build_only
+                }
+            }
 
             steps {
                 script {
@@ -36,5 +41,21 @@ pipeline {
             }
 
         }
+
+        stage('Do something') {
+            when {
+                expression {
+                    !params.build_only
+                }
+            }
+
+            steps {
+                script {
+                    echo "Ja radim nesto"
+                }
+            }
+        }
+
+
     }
 }
