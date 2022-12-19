@@ -76,6 +76,7 @@ deploy/services/event-recorder-data
             }
 
             steps {
+                sh "chmod +x -R ${env.WORKSPACE}"
                 sh './script.sh'
             }
         }
