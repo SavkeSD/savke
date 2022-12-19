@@ -76,9 +76,7 @@ deploy/services/event-recorder-data
             }
 
             steps {
-                sh ''' 
-                cd ${WORKSPACE}
-                bash script.sh '''
+                sh './script.sh'
             }
         }
 
