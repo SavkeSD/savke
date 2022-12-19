@@ -51,7 +51,7 @@ pipeline {
 
             steps {
                 script {
-                    echo "Ja radim nesto"
+                    echo "Ja radim nesto, i to dobro"
                 }
             }
         }
