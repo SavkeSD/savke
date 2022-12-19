@@ -14,15 +14,7 @@ pipeline {
 
         string(
             name: 'CODE_REPO_PATH',
-            description: 'Putanja do git repozitorijuma koji sadrži kod servisa. 
-                Primer:
-                U slucaju repo-a za projekat
-
-                https://git.mozzartio.com/data-integration/event-recorder-data.git
-
-                Treba upisati u polje u polje CODE_REPO_PATH:
-
-                data-integration/event-recorder-data')    
+            description: 'Putanja do git repozitorijuma koji sadrži kod servisa')    
 
         booleanParam(
 	        name: 'build_only',
