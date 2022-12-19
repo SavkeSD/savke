@@ -18,11 +18,6 @@ pipeline {
 	        defaultValue: false,
 	        description: 'Check this if you only want to build the application and not deploy it to servers')
 
-        booleanParam(
-	        name: 'test',
-	        defaultValue: false,
-	        description: 'Check this if you only want to build the application and not deploy it to servers')
-
         choice(
             name: 'environment',
             choices: ['staging', 'dev', 'production'],
