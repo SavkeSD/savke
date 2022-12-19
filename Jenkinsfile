@@ -16,7 +16,7 @@ pipeline {
         booleanParam(
 	        name: 'build_only',
 	        defaultValue: false,
-	        description: 'Check this if you only want to build the application and not deploy it to servers')
+	        description: 'Check this if you only want to build the application and not deploy it to serversss')
 
         choice(
             name: 'environment',
