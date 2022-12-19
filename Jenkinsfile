@@ -13,15 +13,23 @@ pipeline {
             defaultValue: 'master',
             description: 'Please type in name of the branch you wish to deploy')
 
+        string(
+            name: 'info',
+            description: 'Please type info')    
+
         booleanParam(
 	        name: 'build_only',
 	        defaultValue: true,
 	        description: 'Check this if you only want to build the application and not deploy it to serversss')
 
+
+
         choice(
             name: 'environment',
             choices: ['staging', 'dev', 'production'],
             description: 'Choose environment to deploy to')
+
+
     }
 
     stages {
