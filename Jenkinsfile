@@ -1,9 +1,6 @@
 pipeline {
     agent any
 
-    triggers { 
-        cron('* * * * *') }
-
     options {
         timeout(time: 60, unit: 'MINUTES')
         buildDiscarder(logRotator(numToKeepStr: '50'))
@@ -34,6 +31,8 @@ pipeline {
 
 
     }
+
+    triggers { pollSCM('* * * * *') }
 
     stages {
 
