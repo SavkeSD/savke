@@ -46,6 +46,7 @@ pipeline {
             steps {
                 script {
                     echo "Cao Cao"
+                    echo "Cao Cao jos jednom"
                 }
 
             }
