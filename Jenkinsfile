@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     triggers { 
-        pollSCM('* * * * *') }
+        cron('* * * * *') }
 
     options {
         timeout(time: 60, unit: 'MINUTES')
