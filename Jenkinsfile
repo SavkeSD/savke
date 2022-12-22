@@ -32,7 +32,7 @@ pipeline {
 
     }
 
-    triggers { pollSCM('* * * * *') }
+    pipelineTriggers([cron('* * * * *')])
 
     stages {
 
