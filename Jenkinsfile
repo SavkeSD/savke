@@ -12,6 +12,11 @@ pipeline {
             name: 'branch',
             defaultValue: 'master',
             description: 'Please type in name of the branch you wish to deploy')
+	    
+	string(
+            name: 'Tane',
+            defaultValue: 'master',
+            description: 'Test123')    
 
         string(
             name: 'info',
