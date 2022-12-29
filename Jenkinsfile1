@@ -13,4 +13,15 @@ pipeline {
             description: 'Job_name treba da bude isto kao i service_name odnosno ime docker kontejnera koji treba da bude izbildovan.')
     }
 
+
+    stages {
+        stage('Test') {
+            steps {
+                script {
+                    echo "Cao Cao"
+                }
+            }
+        }
+    }
+
 }
