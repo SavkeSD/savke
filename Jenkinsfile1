@@ -11,6 +11,12 @@ pipeline {
         string(
             name: 'Job_name',
             description: 'Job_name treba da bude isto kao i service_name odnosno ime docker kontejnera koji treba da bude izbildovan.')
+
+        choice(
+            name: 'service_name',
+            choices: ['banner-administration', 'help-desk-processor','newsletter','web-voucher-service','web-inbox','payment-broker','affiliate'],
+            description: 'Choose environment to deploy to')
+    
     }
 
 
