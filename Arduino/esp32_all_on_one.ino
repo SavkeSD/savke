@@ -12,11 +12,12 @@
 
 
 int doorState;
+int kotaoState;
 
 
 //Enter your mqtt server configurations
 const char* mqttServer = "";    //Enter Your mqttServer address
-const int mqttPort = ;       //Port number
+const int mqttPort = 1883;       //Port number
 const char* mqttUser = ""; //User
 const char* mqttPassword = ""; //Password
 // END MQTT CONFIGURATION
@@ -81,7 +82,7 @@ void connect() {
   client.subscribe("SavkeHOME/garageOC");
   client.subscribe("SavkeHOME/kotao");
   client.subscribe("SavkeHOME/controlGarageDoor");
-  client.publish("SavkeHOME/kotaoStatus",String("off").c_str());
+  // client.publish("SavkeHOME/kotaoStatus",String("off").c_str());
 
 }
 
@@ -105,8 +106,6 @@ void MQTTcallback(char* topic, byte* payload, unsigned int length) {
     for (int i = 0; i < length; i++) {
       kotao = kotao + (char)payload[i];
     }
-
-    client.publish("SavkeHOME/kotaoStatus",String(kotao).c_str());
 
     if (kotao=="off"){
       digitalWrite(RELAY_PIN_KOTAO, LOW);
@@ -135,6 +134,14 @@ void publishGarageDoorState(int doorState) {
   }
 }
 
+void publishKotaoState(int kotaoState) {
+  if (kotaoState == HIGH) {
+    client.publish("SavkeHOME/kotaoStatus",String("on").c_str());
+  } else {
+    client.publish("SavkeHOME/kotaoStatus",String("off").c_str());
+  }
+}
+
 void loop() {
   client.loop();
 
@@ -145,8 +152,10 @@ void loop() {
 
   delay(2000);
   doorState = digitalRead(DOOR_SENSOR_PIN); // read state
+  kotaoState = digitalRead(RELAY_PIN_KOTAO);
 
   publishGarageDoorState(doorState);
   publishTH(dht.readTemperature(),dht.readHumidity());
+  publishKotaoState(kotaoState);
 
 }
